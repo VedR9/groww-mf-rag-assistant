@@ -1,8 +1,21 @@
 import os
-from dotenv import load_dotenv
-load_dotenv()
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from dotenv import load_dotenv
+load_dotenv()
+
+# Limit PyTorch memory overhead before loading sentence-transformers
+try:
+    import torch
+    torch.set_num_threads(1)
+except ImportError:
+    pass
+
 from src.api.schema import ChatRequest, ChatResponse
 from src.guardrails.scanner import PIIScanner, IntentClassifier, RefusalEngine
 from src.retrieval.retriever import Retriever
