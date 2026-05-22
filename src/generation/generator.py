@@ -7,10 +7,10 @@ from groq import Groq
 from src.retrieval.models import RetrievalResult
 
 class GroqGenerator:
-    def __init__(self, model_name: str = "llama3-70b-8192"):
+    def __init__(self, model_name: Optional[str] = None):
         # Relies on GROQ_API_KEY being set in the environment
         self.client = Groq() if os.environ.get("GROQ_API_KEY") else None
-        self.model_name = model_name
+        self.model_name = model_name or os.environ.get("LLM_MODEL", "llama-3.3-70b-versatile")
         
         self.system_prompt = (
             "You are a strict, factual assistant for Groww Mutual Funds. "
@@ -40,19 +40,30 @@ class GroqGenerator:
         # 2. Context Packing
         context_blocks = []
         best_url = None
+        max_date = None
+        
         for i, c in enumerate(retrieval_result.chunks):
             chunk_data = c.chunk
             if i == 0:
                 best_url = chunk_data.get("source_url")
+            
+            # Find the max date for the footer
+            chunk_date = chunk_data.get("last_updated") or chunk_data.get("fetched_at")
+            if chunk_date:
+                if not max_date or chunk_date > max_date:
+                    max_date = chunk_date
+                    
             context_blocks.append(f"--- Section: {chunk_data.get('section_title', 'Unknown')} ---\n{chunk_data.get('text', '')}")
             
         context_str = "\n\n".join(context_blocks)
         
         user_prompt = f"Context:\n{context_str}\n\nQuery: {retrieval_result.query}"
         
+        footer = f"\n\nLast updated from sources: {max_date[:10] if max_date else 'Unknown'}"
+        
         # In testing environments without an API key, we return a mock response
         if not self.client:
-            return f"[MOCK GROQ LLM] Based on context: {context_str[:50]}...\n\nSource: {best_url}"
+            return f"[MOCK GROQ LLM] Based on context: {context_str[:50]}...\n\nSource: {best_url}{footer}"
             
         # 3. Groq Inference
         try:
@@ -69,12 +80,14 @@ class GroqGenerator:
             
             # 4. Post-Validation
             if not self._post_validate(llm_text):
-                return "I cannot provide financial recommendations or subjective comparisons."
+                return f"I cannot provide financial recommendations or subjective comparisons.\n\nSource: {best_url}{footer}"
                 
             # 5. Citation Attachment
             if best_url:
                 llm_text += f"\n\nSource: {best_url}"
                 
+            llm_text += footer
+            
             return llm_text
             
         except Exception as e:

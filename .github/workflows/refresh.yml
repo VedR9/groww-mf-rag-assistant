@@ -2,14 +2,16 @@ name: Data Refresh Pipeline
 
 on:
   schedule:
-    # Run every Sunday at 02:00 UTC
-    - cron: '0 2 * * 0'
+    # Run every day at 10:00 AM IST (04:30 UTC)
+    - cron: '30 4 * * *'
   workflow_dispatch: 
     # Allows manual triggering from the GitHub UI
 
 jobs:
   refresh-index:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository

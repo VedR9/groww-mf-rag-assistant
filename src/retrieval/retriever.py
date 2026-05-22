@@ -113,13 +113,13 @@ class Retriever:
                 pos = np.where(dense_indices[0] == idx)[0][0]
                 ip_score = dense_distances[0][pos]
                 
-            if i == 0 and ip_score < threshold and rrf_scores[idx] < 0.01:
+            if i == 0 and ip_score < threshold:
                 return RetrievalResult(
                     query=query,
                     scheme_id=scheme_id,
                     chunks=[],
                     status="not_found",
-                    message="I couldn't find this on the scheme pages we use"
+                    message="I couldn't find this on the scheme pages we use."
                 )
                 
             chunk_dict = self.handle.chunks[idx]

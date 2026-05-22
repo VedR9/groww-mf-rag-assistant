@@ -14,13 +14,15 @@ class Pipeline:
     def refresh(self, force=False, dry_run=False, skip_fetch=False) -> bool:
         logger.info("Starting full data refresh pipeline...")
         
+        import sys
+        
         steps = [
-            ("Fetcher", ["python3", "-m", "src.ingest", "1.1"]),
-            ("Extractor", ["python3", "-m", "src.ingest", "1.2"]),
-            ("Cleaner", ["python3", "-m", "src.ingest", "1.3"]),
-            ("Chunker", ["python3", "-m", "src.ingest", "1.4"]),
-            ("Embedder", ["python3", "-m", "src.ingest", "1.5"]),
-            ("Indexer", ["python3", "-m", "src.ingest", "1.6"])
+            ("Fetcher", [sys.executable, "-m", "src.ingest", "1.1"]),
+            ("Extractor", [sys.executable, "-m", "src.ingest", "1.2"]),
+            ("Cleaner", [sys.executable, "-m", "src.ingest", "1.3"]),
+            ("Chunker", [sys.executable, "-m", "src.ingest", "1.4"]),
+            ("Embedder", [sys.executable, "-m", "src.ingest", "1.5"]),
+            ("Indexer", [sys.executable, "-m", "src.ingest", "1.6"])
         ]
         
         if skip_fetch:
