@@ -17,6 +17,6 @@ data/processed/**/*
 !data/processed/.gitkeep
 
 # Vector index artifacts (Phase 3+)
-data/index/
+# data/index/ (We need to push this to HuggingFace)
 
 .DS_Store
