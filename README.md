@@ -5,7 +5,7 @@ Facts-only FAQ assistant for **HDFC Mutual Fund** schemes using a **closed corpu
 **Disclaimer:** Facts-only. No investment advice.
 
 ## 🚀 Live Deployment
-- **Frontend (Vercel):** [Groww MF RAG Assistant UI](https://groww-mf-rag-assistant-qmfrxky7y-vedr9s-projects.vercel.app/)
+- **Frontend (Vercel):** [Groww MF RAG Assistant UI](https://groww-mf-rag-assistant.vercel.app/)
 - **Backend API (HuggingFace Spaces):** Hosted via Docker container with 16GB RAM
 - **Automation (GitHub Actions):** Scrapes the Groww URLs daily at 10:00 AM IST, rebuilds the FAISS vector index, and automatically pushes the fresh data to HuggingFace.
 
