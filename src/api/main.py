@@ -8,11 +8,12 @@ from src.guardrails.scanner import PIIScanner, IntentClassifier, RefusalEngine
 from src.retrieval.retriever import Retriever
 from src.generation.generator import GroqGenerator
 
-app = FastAPI(title="Groww Mutual Fund RAG API")
+app = FastAPI(title="Groww MF RAG API")
 
+# Update CORS to allow requests from the Vercel frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Allow all origins so Vercel can connect seamlessly
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
