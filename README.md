@@ -4,6 +4,11 @@ Facts-only FAQ assistant for **HDFC Mutual Fund** schemes using a **closed corpu
 
 **Disclaimer:** Facts-only. No investment advice.
 
+## 🚀 Live Deployment
+- **Frontend (Vercel):** [Groww MF RAG Assistant UI](https://groww-mf-rag-assistant-qmfrxky7y-vedr9s-projects.vercel.app/)
+- **Backend API (HuggingFace Spaces):** Hosted via Docker container with 16GB RAM
+- **Automation (GitHub Actions):** Scrapes the Groww URLs daily at 10:00 AM IST, rebuilds the FAISS vector index, and automatically pushes the fresh data to HuggingFace.
+
 ## Selected AMC and schemes
 
 | AMC | HDFC Mutual Fund |
@@ -22,68 +27,68 @@ Facts-only FAQ assistant for **HDFC Mutual Fund** schemes using a **closed corpu
 
 RAG pipeline over the closed corpus: ingest → chunk → embed → retrieve → generate with guardrails. See [docs/architecture.md](docs/architecture.md) and [docs/complianceRules.md](docs/complianceRules.md).
 
+- **Frontend:** React + Vite + TailwindCSS
+- **Backend:** FastAPI, Python 3.11
+- **Vector Database:** FAISS
+- **Embeddings:** `sentence-transformers/all-MiniLM-L6-v2`
+- **LLM:** Groq API (`llama3-8b-8192`)
+
 ## Project structure
 
 ```
-├── config/           # amc.yaml, aliases, refusal links, prompts (later phases)
+├── config/           # amc.yaml, aliases, refusal links, prompts
 ├── data/
 │   ├── url_registry.csv
 │   ├── raw/          # Phase 1: fetched HTML
 │   └── processed/    # Phase 2: chunks
 ├── src/
-│   ├── foundation/   # Phase 0: config + validation ✓
-│   ├── ingest/       # Phase 1 (subphases/phase_1_1_registry … phase_1_7_refresh)
-│   ├── index/        # Phase 3
-│   ├── retrieval/    # Phase 3
-│   ├── generation/   # Phase 4
-│   ├── guardrails/   # Phase 5
-│   └── api/          # Phase 6
-├── ui/               # Phase 6
+│   ├── foundation/   # Phase 0: config + validation
+│   ├── ingest/       # Phase 1: ingestion pipeline
+│   ├── index/        # Phase 3: indexing
+│   ├── retrieval/    # Phase 3: retrieval
+│   ├── generation/   # Phase 4: generation
+│   ├── guardrails/   # Phase 5: guardrails
+│   └── api/          # Phase 6: fastAPI backend
+├── ui/               # Phase 6: React frontend
 ├── eval/             # golden_queries.jsonl
 ├── tests/
 └── docs/
 ```
 
-## Setup (Phase 0)
+## Setup & Local Development
 
 Requires **Python 3.11+**.
 
 ```bash
-cd "Groww Mutual Fund RAG Assistant"
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Validate Phase 0 exit criteria:
-
+To run the full data scraping and indexing pipeline locally:
 ```bash
-python -m src.foundation.validate
-pytest
+python -m src.ingest 1.7
 ```
 
-Phase 1.1 registry gate (pre-flight, no HTTP):
-
+To run the FastAPI backend:
 ```bash
-python -m src.ingest preflight
-# or
-python -m src.ingest 1.1
+uvicorn src.api.main:app --reload
 ```
 
 ## Implementation status
 
 | Phase | Status |
 |-------|--------|
-| 0 — Foundation & compliance | Done |
-| 1.1 — Registry gate | Done |
-| 1.2–1.7 — Corpus acquisition | Pending |
-| 2 — Processing & chunking | Pending |
-| 3 — Indexing & retrieval | Pending |
-| 4 — Generation | Pending |
-| 5 — Guardrails | Pending |
-| 6 — UI & API | Pending |
-| 7 — Testing & eval | Pending |
-| 8 — Deploy & docs | Pending |
+| 0 — Foundation & compliance | ✅ Done |
+| 1.1 — Registry gate | ✅ Done |
+| 1.2–1.7 — Corpus acquisition | ✅ Done |
+| 2 — Processing & chunking | ✅ Done |
+| 3 — Indexing & retrieval | ✅ Done |
+| 4 — Generation | ✅ Done |
+| 5 — Guardrails | ✅ Done |
+| 6 — UI & API | ✅ Done |
+| 7 — Testing & eval | ✅ Done |
+| 8 — Deploy & docs | ✅ Done |
 
 ## Known limitations
 
