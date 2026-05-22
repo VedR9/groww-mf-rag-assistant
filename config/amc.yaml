@@ -1,0 +1,36 @@
+# HDFC Mutual Fund — closed corpus (5 Groww scheme pages only).
+# See docs/architecture.md and docs/complianceRules.md.
+
+amc: HDFC Mutual Fund
+reference_context: Groww mutual fund scheme pages
+corpus_policy: closed
+corpus_size: 5
+
+schemes:
+  - name: HDFC Mid Cap Fund Direct Growth
+    slug: hdfc-mid-cap-fund-direct-growth
+    category: mid-cap
+    url: https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth
+
+  - name: HDFC Equity Fund Direct Growth
+    slug: hdfc-equity-fund-direct-growth
+    category: diversified-equity
+    url: https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+
+  - name: HDFC Focused Fund Direct Growth
+    slug: hdfc-focused-fund-direct-growth
+    category: focused-equity
+    url: https://groww.in/mutual-funds/hdfc-focused-fund-direct-growth
+
+  - name: HDFC ELSS Tax Saver Fund Direct Plan Growth
+    slug: hdfc-elss-tax-saver-fund-direct-plan-growth
+    category: elss
+    url: https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+
+  - name: HDFC Large Cap Fund Direct Growth
+    slug: hdfc-large-cap-fund-direct-growth
+    category: large-cap
+    url: https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+
+# Default citation when scheme is unknown (generic refusals / clarifications).
+default_scheme_slug: hdfc-equity-fund-direct-growth

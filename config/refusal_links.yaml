@@ -1,0 +1,9 @@
+# Educational / refusal citation targets — must be URLs from the closed corpus only.
+
+default_slug: hdfc-equity-fund-direct-growth
+
+intent_map:
+  advisory_generic: hdfc-equity-fund-direct-growth
+  advisory_elss: hdfc-elss-tax-saver-fund-direct-plan-growth
+  advisory_comparison: hdfc-equity-fund-direct-growth
+  out_of_scope: hdfc-equity-fund-direct-growth

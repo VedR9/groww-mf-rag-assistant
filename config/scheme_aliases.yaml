@@ -1,0 +1,26 @@
+# Maps user-facing aliases to canonical scheme slugs (config/amc.yaml).
+# Aliases must not overlap across schemes.
+
+aliases:
+  hdfc-mid-cap-fund-direct-growth:
+    - hdfc mid cap
+    - mid cap fund
+    - hdfc midcap
+
+  hdfc-equity-fund-direct-growth:
+    - hdfc equity
+    - equity fund hdfc
+
+  hdfc-focused-fund-direct-growth:
+    - hdfc focused
+    - focused fund
+
+  hdfc-elss-tax-saver-fund-direct-plan-growth:
+    - hdfc tax saver
+    - hdfc elss
+    - elss hdfc
+    - tax saver fund
+
+  hdfc-large-cap-fund-direct-growth:
+    - hdfc large cap
+    - large cap fund hdfc

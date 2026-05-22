@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "groww-mf-rag-assistant"
+version = "0.1.0"
+description = "Facts-only mutual fund FAQ assistant (closed Groww corpus RAG)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "PyYAML>=6.0.1,<7",
+  "sentence-transformers>=2.0",
+  "numpy",
+  "faiss-cpu",
+  "rank-bm25",
+  "groq",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0,<9"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
