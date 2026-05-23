@@ -1,3 +1,11 @@
+---
+title: Groww MF Rag Backend
+emoji: 🚀
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+pinned: false
+---
 # Groww Mutual Fund RAG Assistant
 
 Facts-only FAQ assistant for **HDFC Mutual Fund** schemes using a **closed corpus** of five [Groww](https://groww.in) scheme pages. No investment advice; every answer cites exactly one source URL from that set.
