@@ -96,7 +96,7 @@ function App() {
       </header>
 
       {/* Main Chat Canvas */}
-      <main className="flex-1 overflow-y-auto pt-24 pb-32 chat-container">
+      <main className="flex-1 overflow-y-auto pt-24 pb-48 chat-container">
         <div className="max-w-4xl mx-auto px-4 md:px-0 space-y-8">
           
           {messages.length === 0 ? (
