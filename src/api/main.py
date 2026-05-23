@@ -59,6 +59,18 @@ async def chat(request: ChatRequest):
             citation_url=None,
             refused=False
         )
+    elif intent == "farewell":
+        return ChatResponse(
+            answer="Goodbye! Feel free to return if you have more questions about HDFC Mutual Funds. Have a great day!",
+            citation_url=None,
+            refused=False
+        )
+    elif intent == "gratitude":
+        return ChatResponse(
+            answer="You're very welcome! Let me know if there's anything else you need help with.",
+            citation_url=None,
+            refused=False
+        )
         
     # 3. Retrieval
     if not retriever:

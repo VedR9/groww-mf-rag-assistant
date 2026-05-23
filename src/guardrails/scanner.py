@@ -22,7 +22,7 @@ class PIIScanner:
         return False
 
 class IntentClassifier:
-    """Classifies if a query is factual (allowed), advisory (blocked), or a greeting."""
+    """Classifies if a query is factual (allowed), advisory (blocked), or conversational (greeting/farewell/gratitude)."""
     
     ADVISORY_PATTERNS = [
         r"\bshould (i|we) invest\b",
@@ -43,15 +43,32 @@ class IntentClassifier:
         r"^(how are you|what's up|whats up)\b"
     ]
     
+    FAREWELL_PATTERNS = [
+        r"^(bye|goodbye|see you|cya|take care|have a good day)\b",
+        r"^bye\b"
+    ]
+    
+    GRATITUDE_PATTERNS = [
+        r"^(thanks|thank you|thx|appreciate it|awesome thanks)\b"
+    ]
+    
     @classmethod
     def classify(cls, query: str) -> str:
-        """Returns 'advisory', 'greeting', or 'factual'."""
+        """Returns 'advisory', 'greeting', 'farewell', 'gratitude', or 'factual'."""
         query_lower = query.lower().strip()
         
-        # Check greetings first
+        # Check conversational intents first
         for pattern in cls.GREETING_PATTERNS:
             if re.search(pattern, query_lower):
                 return "greeting"
+                
+        for pattern in cls.FAREWELL_PATTERNS:
+            if re.search(pattern, query_lower):
+                return "farewell"
+                
+        for pattern in cls.GRATITUDE_PATTERNS:
+            if re.search(pattern, query_lower):
+                return "gratitude"
                 
         # Check advisory
         for pattern in cls.ADVISORY_PATTERNS:
