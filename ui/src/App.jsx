@@ -206,7 +206,7 @@ function App() {
               <button 
                 onClick={() => handleSend()}
                 disabled={!input.trim() || isLoading}
-                className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20 disabled:opacity-50 disabled:hover:scale-100"
+                className="w-12 h-12 bg-gradient-to-br from-primary-container to-primary text-white rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary-container/30 disabled:opacity-50 disabled:hover:scale-100"
               >
                 <span className="material-symbols-outlined">arrow_upward</span>
               </button>
