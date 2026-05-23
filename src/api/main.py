@@ -53,6 +53,12 @@ async def chat(request: ChatRequest):
     if intent == "advisory":
         ans, url = RefusalEngine.get_advisory_refusal()
         return ChatResponse(answer=ans, citation_url=url, refused=True)
+    elif intent == "greeting":
+        return ChatResponse(
+            answer="Hello! I am the Groww Mutual Fund Assistant. I can help answer factual questions about HDFC Mutual Fund schemes. How can I assist you today?",
+            citation_url=None,
+            refused=False
+        )
         
     # 3. Retrieval
     if not retriever:

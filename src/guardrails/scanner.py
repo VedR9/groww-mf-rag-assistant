@@ -22,7 +22,7 @@ class PIIScanner:
         return False
 
 class IntentClassifier:
-    """Classifies if a query is factual (allowed) or advisory (blocked)."""
+    """Classifies if a query is factual (allowed), advisory (blocked), or a greeting."""
     
     ADVISORY_PATTERNS = [
         r"\bshould (i|we) invest\b",
@@ -37,14 +37,27 @@ class IntentClassifier:
         r"\bgood.*fund\b",
         r"\bwhich.*fund\b"
     ]
+
+    GREETING_PATTERNS = [
+        r"^(hi|hello|hey|greetings|good morning|good afternoon|good evening|howdy)\b",
+        r"^(how are you|what's up|whats up)\b"
+    ]
     
     @classmethod
     def classify(cls, query: str) -> str:
-        """Returns 'advisory' if blocked patterns match, else 'factual'."""
-        query_lower = query.lower()
+        """Returns 'advisory', 'greeting', or 'factual'."""
+        query_lower = query.lower().strip()
+        
+        # Check greetings first
+        for pattern in cls.GREETING_PATTERNS:
+            if re.search(pattern, query_lower):
+                return "greeting"
+                
+        # Check advisory
         for pattern in cls.ADVISORY_PATTERNS:
             if re.search(pattern, query_lower):
                 return "advisory"
+                
         return "factual"
 
 class RefusalEngine:
