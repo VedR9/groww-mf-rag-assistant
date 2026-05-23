@@ -101,17 +101,17 @@ function App() {
           
           {messages.length === 0 ? (
             /* Welcome Screen */
-            <section className="py-12 flex flex-col items-center text-center animate-fadeInUp">
-              <div className="mb-8 p-4 bg-primary-container/20 rounded-full">
-                <span className="material-symbols-outlined text-primary text-5xl">smart_toy</span>
+            <section className="py-4 flex flex-col items-center text-center animate-fadeInUp">
+              <div className="mb-4 p-3 bg-primary-container/20 rounded-full">
+                <span className="material-symbols-outlined text-primary text-4xl">smart_toy</span>
               </div>
-              <h2 className="text-3xl font-bold text-on-surface mb-4">How can I help you today?</h2>
+              <h2 className="text-2xl font-bold text-on-surface mb-2">How can I help you today?</h2>
               
-              <div className="w-full max-w-2xl mb-10">
-                <p className="text-secondary mb-4">I can answer factual questions about these supported funds:</p>
+              <div className="w-full max-w-2xl mb-6">
+                <p className="text-secondary mb-3 text-sm">I can answer factual questions about these supported funds:</p>
                 <div className="flex flex-wrap justify-center gap-2">
                   {["HDFC Mid Cap Fund", "HDFC Equity Fund", "HDFC Focused Fund", "HDFC ELSS Tax Saver", "HDFC Large Cap Fund"].map(fund => (
-                    <span key={fund} className="px-4 py-1.5 bg-primary-container/10 text-primary border border-primary/10 rounded-full text-sm font-medium">
+                    <span key={fund} className="px-3 py-1 bg-primary-container/10 text-primary border border-primary/10 rounded-full text-xs font-medium">
                       {fund}
                     </span>
                   ))}
@@ -119,8 +119,8 @@ function App() {
               </div>
 
               <div className="w-full max-w-xl text-left">
-                <h3 className="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4 px-2">Example Questions</h3>
-                <div className="space-y-3">
+                <h3 className="text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-2 px-2">Example Questions</h3>
+                <div className="space-y-2">
                   {[
                     "What is the expense ratio of HDFC Mid Cap Fund Direct Growth?",
                     "What is the exit load on HDFC Large Cap Fund Direct Growth?",
@@ -131,7 +131,7 @@ function App() {
                     <button 
                       key={idx} 
                       onClick={() => handleSend(q)}
-                      className={`w-full text-left p-4 bg-white border border-outline-variant rounded-xl text-on-surface hover:bg-primary-container/5 hover:border-primary-container hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 transition-all animate-fadeInUp stagger-${idx+1}`}
+                      className={`w-full text-left p-3 bg-white border border-outline-variant rounded-xl text-on-surface text-sm hover:bg-primary-container/5 hover:border-primary-container hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5 transition-all animate-fadeInUp stagger-${idx+1}`}
                     >
                       {q}
                     </button>
