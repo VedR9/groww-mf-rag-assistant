@@ -31,6 +31,9 @@ Facts-only FAQ assistant for **HDFC Mutual Fund** schemes using a **closed corpu
 | HDFC ELSS Tax Saver Fund Direct Plan Growth | ELSS | https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth |
 | HDFC Large Cap Fund Direct Growth | Large-cap | https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth |
 
+
+https://github.com/user-attachments/assets/ed22027a-5bde-4538-ad95-fa69afa9df31
+
 ## Architecture
 
 RAG pipeline over the closed corpus: ingest → chunk → embed → retrieve → generate with guardrails. See [docs/architecture.md](docs/architecture.md) and [docs/complianceRules.md](docs/complianceRules.md).
